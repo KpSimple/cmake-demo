@@ -26,3 +26,19 @@ export ANDROID_STANDALONE_TOOLCHAIN=./android-toolchain
 `  
 cmake -DCMAKE_TOOLCHAIN_FILE=../android.toolchain.cmake -DANDROID_ABI="armeabi" ..  
 `  
+### only position independent executables (PIE) are supported.  
+在Android 4.4之后添加了新的保护机制,可执行文件必须是采用PIE编译的  
+如果是使用ndk进行编译的(需要使用到Android.mk脚本),则在脚本中添加:  
+LOCAL_CFLAGS += -pie -fPIE  
+LOCAL_LDFLAGS += -pie -fPIE  
+
+cmake中
+CMAKE_C_FLAGS
+CMAKE_CXX_FLAGS  
+CMAKE_EXE_LINKER_FLAGS  
+分别相当于：CFLAGS， CXXFLAGS， LDFLAGS。  
+set (CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -DEMBED")  
+这种写法的好处是，不会覆盖CMAKE_CXX_FLAGS本来的信息。只是把需要添加的内容添加进去
+所以添加
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pie -fPIE")
+set(CMAKE_EXE_LINK_FLAGS "${CMAKE_EXE_LINK_FLAGS} -pie -fPIE")
