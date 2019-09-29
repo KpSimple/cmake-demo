@@ -32,13 +32,13 @@ cmake -DCMAKE_TOOLCHAIN_FILE=../android.toolchain.cmake -DANDROID_ABI="armeabi" 
 LOCAL_CFLAGS += -pie -fPIE  
 LOCAL_LDFLAGS += -pie -fPIE  
 
-cmake中
-CMAKE_C_FLAGS
+cmake中  
+CMAKE_C_FLAGS  
 CMAKE_CXX_FLAGS  
-CMAKE_EXE_LINKER_FLAGS  
-分别相当于：CFLAGS， CXXFLAGS， LDFLAGS。  
+CMAKE_EXE_LINKER_FLAGS    
+分别相当于：CFLAGS， CXXFLAGS， LDFLAGS  
 set (CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -DEMBED")  
-这种写法的好处是，不会覆盖CMAKE_CXX_FLAGS本来的信息。只是把需要添加的内容添加进去
-所以添加
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pie -fPIE")
-set(CMAKE_EXE_LINK_FLAGS "${CMAKE_EXE_LINK_FLAGS} -pie -fPIE")
+这种写法的好处是，不会覆盖CMAKE_CXX_FLAGS本来的信息。只是把需要添加的内容添加进去  
+所以添加  
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pie -fPIE")  
+set(CMAKE_EXE_LINK_FLAGS "${CMAKE_EXE_LINK_FLAGS} -pie -fPIE")  
